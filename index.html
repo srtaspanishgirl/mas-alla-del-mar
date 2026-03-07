@@ -76,6 +76,22 @@
             object-position: top;
         }
 
+        /* Ajuste para pantallas muy grandes */
+        @media (min-width: 1536px) {
+            html { font-size: 18px; }
+        }
+
+        /* Estilos Menú Móvil */
+        #mobile-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+        #mobile-menu.open {
+            max-height: 500px;
+            padding-bottom: 2rem;
+        }
+
         .character-card:hover .char-img {
             transform: scale(1.08);
         }
@@ -85,6 +101,7 @@
             backdrop-filter: blur(5px);
             border: 1px solid rgba(30, 64, 175, 0.1);
         }
+        
     </style>
 </head>
 <body class="font-sans">
@@ -93,12 +110,31 @@
     <nav class="fixed w-full z-50 glass-nav border-b border-sea-light/10">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
             <span class="text-sea-main font-serif font-bold text-2xl tracking-tight">Más Allá del Mar</span>
+            
+            <!-- Botón Hamburguesa -->
+            <button id="menu-btn" class="md:hidden text-sea-main focus:outline-none" aria-label="Abrir menú">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            
             <div class="hidden md:flex items-center space-x-8 text-xs font-semibold uppercase tracking-widest text-sea-deep">
                 <a href="#inicio" class="hover:text-sea-light transition-colors">Inicio</a>
                 <a href="#historia" class="hover:text-sea-light transition-colors">¿Qué es MADM?</a>
                 <a href="#personajes" class="hover:text-sea-light transition-colors">Personajes</a>
                 <a href="#comunidad" class="hover:text-sea-light transition-colors">Comunidad</a>
                 <a href="#descargar" class="text-sea-main bg-sea-soft px-4 py-2 rounded-full hover:bg-sea-light hover:text-white transition-all inline-block">Descargar</a>
+            </div>
+        </div>
+
+        <!-- Menú Móvil -->
+        <div id="mobile-menu" class="md:hidden px-6 bg-white/95">
+            <div class="flex flex-col space-y-4 text-xs font-bold uppercase tracking-widest text-sea-deep pt-4">
+                <a href="#inicio" class="py-2 border-b border-gray-100">Inicio</a>
+                <a href="#historia" class="py-2 border-b border-gray-100">¿Qué es MADM?</a>
+                <a href="#personajes" class="py-2 border-b border-gray-100">Personajes</a>
+                <a href="#comunidad" class="py-2 border-b border-gray-100">Comunidad</a>
+                <a href="#descargar" class="py-3 text-sea-main text-center bg-sea-soft rounded-xl">Descargar Juego</a>
             </div>
         </div>
     </nav>
@@ -358,6 +394,28 @@
     </footer>
 
     <script>
+        // LÓGICA MENÚ MÓVIL
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+
+        menuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            // Cambiar icono de hamburguesa a X
+            menuIcon.setAttribute('d', isOpen 
+                ? 'M6 18L18 6M6 6l12 12' 
+                : 'M4 6h16M4 12h16M4 18h16'
+            );
+        });
+
+        // Cerrar menú al hacer clic en un enlace (para móviles)
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            });
+        });
+        
         let currentPos = 0;
         function moveCarousel(direction) {
             const carousel = document.getElementById('carousel');
@@ -400,6 +458,7 @@
 </body>
 
 </html>
+
 
 
 
