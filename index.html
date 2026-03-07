@@ -92,6 +92,14 @@
             padding-bottom: 2rem;
         }
 
+        /* AJUSTE CRÍTICO PARA EL TÍTULO EN MÓVIL */
+        .responsive-title {
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
+            white-space: normal; /* Permite que el texto salte de línea */
+        }
+
         .character-card:hover .char-img {
             transform: scale(1.08);
         }
@@ -142,7 +150,7 @@
     <!-- Hero Section -->
     <section id="inicio" class="hero-sea min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
         <div class="max-w-7xl w-full">
-            <h1 class="text-white text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 drop-shadow-[0_10px_10px_rgba(0,0,0,0.5)] leading-tight pt-12 whitespace-nowrap overflow-hidden text-ellipsis">
+            <h1 class="responsive-title text-white text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] leading-tight">
                 Más Allá del Mar
             </h1>
             <p class="text-sea-soft text-lg md:text-2xl font-light mb-16 tracking-[0.4em] uppercase drop-shadow-md">
@@ -458,6 +466,7 @@
 </body>
 
 </html>
+
 
 
 
