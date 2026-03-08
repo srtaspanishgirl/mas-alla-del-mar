@@ -102,6 +102,50 @@
         .character-card:hover .char-img {
             transform: scale(1.08);
         }
+
+        .view-hidden { display: none !important; }
+
+        .guide-images-container {
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            background: #f1f5f9;
+            border-radius: 1.5rem;
+            padding: 1.5rem;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .guide-page-img {
+            max-width: 100%;
+            height: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+
+        /* Estilo para el contenedor del video de Pinterest */
+        .pinterest-video-container {
+            position: relative;
+            padding-bottom: 177.77%; /* Proporción 9:16 para móviles */
+            height: 0;
+            overflow: hidden;
+            max-width: 450px;
+            margin: 0 auto;
+            border-radius: 20px;
+            background: #000;
+        }
+        .pinterest-video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
     </style>
 </head>
 <body class="font-sans">
@@ -109,7 +153,7 @@
     <!-- Navegación -->
     <nav class="fixed w-full z-50 glass-nav border-b border-sea-light/10">
         <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-sea-main font-serif font-bold text-xl md:text-2xl tracking-tight">Más Allá del Mar</span>
+            <span onclick="showMainView()" class="text-sea-main font-serif font-bold text-xl md:text-2xl tracking-tight cursor-pointer">Más Allá del Mar</span>
             
             <button id="menu-btn" class="md:hidden text-sea-main focus:outline-none" aria-label="Abrir menú">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,292 +162,222 @@
             </button>
             
             <div class="hidden md:flex items-center space-x-8 text-xs font-semibold uppercase tracking-widest text-sea-deep">
-                <a href="#inicio" class="hover:text-sea-light transition-colors">Inicio</a>
-                <a href="#historia" class="hover:text-sea-light transition-colors">¿Qué es MADM?</a>
-                <a href="#personajes" class="hover:text-sea-light transition-colors">Personajes</a>
-                <a href="#comunidad" class="hover:text-sea-light transition-colors">Comunidad</a>
-                <a href="#descargar" class="text-sea-main bg-sea-soft px-4 py-2 rounded-full hover:bg-sea-light hover:text-white transition-all inline-block">Descargar</a>
+                <a href="#inicio" onclick="showMainView()" class="hover:text-sea-light transition-colors py-2">Inicio</a>
+                <a href="#historia" onclick="showMainView()" class="hover:text-sea-light transition-colors py-2">¿Qué es MADM?</a>
+                <a href="#personajes" onclick="showMainView()" class="hover:text-sea-light transition-colors py-2">Personajes</a>
+                <button onclick="showGuideView()" class="hover:text-sea-light transition-colors py-2 uppercase tracking-widest text-xs font-semibold">Guía de Respuestas</button>
+                <a href="#comunidad" onclick="showMainView()" class="hover:text-sea-light transition-colors py-2">Comunidad</a>
+                <a href="#descargar" onclick="showMainView()" class="text-sea-main bg-sea-soft px-4 py-2 rounded-full hover:bg-sea-light hover:text-white transition-all inline-block">Descargar</a>
             </div>
         </div>
 
         <div id="mobile-menu" class="md:hidden px-6 bg-white/95">
             <div class="flex flex-col space-y-4 text-xs font-bold uppercase tracking-widest text-sea-deep pt-4">
-                <a href="#inicio" class="py-2 border-b border-gray-100">Inicio</a>
-                <a href="#historia" class="py-2 border-b border-gray-100">¿Qué es MADM?</a>
-                <a href="#personajes" class="py-2 border-b border-gray-100">Personajes</a>
-                <a href="#comunidad" class="py-2 border-b border-gray-100">Comunidad</a>
-                <a href="#descargar" class="py-3 text-sea-main text-center bg-sea-soft rounded-xl">Descargar Juego</a>
+                <a href="#inicio" onclick="showMainView()" class="py-2 border-b border-gray-100">Inicio</a>
+                <a href="#historia" onclick="showMainView()" class="py-2 border-b border-gray-100">¿Qué es MADM?</a>
+                <a href="#personajes" onclick="showMainView()" class="py-2 border-b border-gray-100">Personajes</a>
+                <button onclick="showGuideView()" class="py-2 border-b border-gray-100 text-left uppercase tracking-widest text-xs font-bold">Guía de Respuestas</button>
+                <a href="#comunidad" onclick="showMainView()" class="py-2 border-b border-gray-100">Comunidad</a>
+                <a href="#descargar" onclick="showMainView()" class="py-3 text-sea-main text-center bg-sea-soft rounded-xl">Descargar Juego</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero-sea min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
-        <div class="max-w-7xl w-full">
-            <h1 class="responsive-title text-white text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] leading-tight">
-                Más Allá del Mar
-            </h1>
-            <p class="text-sea-soft text-lg md:text-2xl font-light mb-16 tracking-[0.4em] uppercase drop-shadow-md">
-                fangame de Attack on Titan
-            </p>
-            <div class="flex flex-col md:flex-row gap-8 justify-center">
-                <a href="#descargar" class="bg-sea-main text-white px-14 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-sm shadow-2xl hover:scale-105 hover:bg-sea-light transition-all">
-                    Comenzar Aventura
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Historia -->
-    <section id="historia" class="py-32 bg-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-sea-main font-serif text-4xl mb-8 font-bold">¿Qué es Más Allá del Mar?</h2>
-            <p class="text-slate-600 text-xl leading-relaxed font-light italic">
-                Este es un "fan game" interactivo inspirado en el universo de Shingeki no Kyojin donde tú eres el protagonista. Contiene mecánicas de decisiones, rutas amorosas y diversos finales. Tus elecciones influirán en la afinidad con los personajes, pudiendo enamorar a las rutas y crear preciosas amistades con el resto.
-            </p>
-        </div>
-    </section>
-
-    <!-- Personajes (Carrusel) -->
-    <section id="personajes" class="py-24 bg-sea-soft overflow-hidden">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-sea-main font-serif text-4xl mb-4 text-center font-bold">Rutas disponibles</h2>
-            <p class="text-slate-500 text-center mb-16 uppercase tracking-widest text-xs">Conoce las rutas amorosas oficiales</p>
-            
-            <div class="relative group">
-                <button onclick="moveCarousel(-1)" class="absolute left-[-20px] top-1/2 -translate-y-1/2 z-10 bg-white p-4 rounded-full shadow-lg hover:text-sea-light transition-all">
-                    <span class="text-2xl">←</span>
-                </button>
-                <button onclick="moveCarousel(1)" class="absolute right-[-20px] top-1/2 -translate-y-1/2 z-10 bg-white p-4 rounded-full shadow-lg hover:text-sea-light transition-all">
-                    <span class="text-2xl">→</span>
-                </button>
-
-                <div class="overflow-hidden rounded-3xl">
-                    <div id="carousel" class="carousel-container">
-                        <!-- Las rutas se mantienen igual -->
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden group">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/736x/d6/1c/6b/d61c6baa534c3a8f9221edc1ddb9c4e7.jpg" alt="Levi" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Levi Ackerman</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/736x/5b/27/61/5b27611f0e358dbf2f21b290c3492ad8.jpg" alt="Eren" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Eren Jaeger</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/1200x/2c/0f/37/2c0f37769aaab3c0a3710ce5f1447f73.jpg" alt="Armin" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Armin Arlert</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/736x/5d/71/7c/5d717c8b77dada8d631f452b69703779.jpg" alt="Mikasa" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Mikasa Ackerman</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/1200x/f5/20/8b/f5208ba95bf860423fdf78ad9f7f931d.jpg" alt="Hange" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Hange Zoë</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/1200x/e6/5f/ee/e65fee392e6f29d8f83349c95b87e04d.jpg" alt="Jean" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Jean Kirstein</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/1200x/75/13/a8/7513a88834a29951269cf16abbabc530.jpg" alt="Erwin" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Erwin Smith</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="character-card">
-                            <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-                                <div class="aspect-[3/4] overflow-hidden bg-slate-200 relative">
-                                    <img src="https://i.pinimg.com/736x/49/f6/48/49f6483d7a95b30dca904c10ad08840d.jpg" alt="Reiner" class="char-img char-img-top">
-                                    <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white">
-                                        <p class="font-serif text-xl">Reiner Braun</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comunidad (CORREGIDA) -->
-    <section id="comunidad" class="py-24 bg-white text-center">
-        <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-sea-main font-serif text-4xl mb-6 font-bold">Únete a la Legión</h2>
-            <p class="text-slate-600 mb-10 text-lg">Síguenos si quieres ver las actualizaciones del juego, conocer a gente o mostrar tus fanarts, ¡te esperamos!</p>
-            
-            <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
-                <!-- Discord -->
-                <a href="https://discord.gg/gK7EddKtuv" target="_blank" onclick="fetch('https://api.countapi.xyz/hit/mas-alla-del-mar/discord')" class="w-full sm:w-64 bg-discord text-white px-8 py-5 rounded-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition-transform shadow-lg group">
-                    <svg class="w-6 h-6 fill-current" viewBox="0 0 127.14 96.36">
-                        <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21a105.73,105.73,0,0,0,32.22,16.15,77.7,77.7,0,0,0,7.34-11.86,67.35,67.35,0,0,1-11.9-5.69c.3-.22.59-.45.88-.67a73.42,73.42,0,0,0,65.43,0c.29.22.58.45.88.67a67.34,67.34,0,0,1-11.9,5.69,77.76,77.76,0,0,0,7.34,11.86,105.27,105.27,0,0,0,32.25-16.15C129.58,50.49,125.16,26.78,117.7,8.07ZM42.47,65.66C36.18,65.66,31,59.85,31,52.71s5.07-12.95,11.42-12.95,11.53,5.81,11.53,12.95S48.86,65.66,42.47,65.66Zm42.2,0C78.38,65.66,73.2,59.85,73.2,52.71s5.07-12.95,11.42-12.95,11.53,5.81,11.53,12.95S91.06,65.66,84.67,65.66Z"/>
-                    </svg>
-                    <span class="text-lg">Discord</span>
-                </a>
-                
-                <!-- TikTok (CORREGIDO) -->
-                <a href="https://www.tiktok.com/@srtaspanishgirl" target="_blank" class="w-full sm:w-64 bg-tiktok text-white px-8 py-5 rounded-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition-transform shadow-lg group">
-                    <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512">
-                        <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
-                    </svg>
-                    <span class="text-lg">TikTok</span>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Descargar -->
-    <section id="descargar" class="py-32 bg-sea-soft text-center">
-        <div class="max-w-6xl mx-auto px-6">
-            <h2 class="text-sea-main font-serif text-4xl mb-6 font-bold">Descarga el Juego</h2>
-            <p class="text-slate-600 mb-16 text-lg max-w-2xl mx-auto">El prólogo del juego ya está disponible. ¡Empieza tu historia hoy mismo!</p>
-
-            <div class="grid md:grid-cols-3 gap-8 mb-20">
-                <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
-                    <span class="text-5xl mb-6">💻</span>
-                    <h3 class="font-bold text-sea-deep mb-2">PC Windows</h3>
-                    <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/MASALLADELMAR-1.0-pc.zip" download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold hover:bg-sea-deep transition-all mt-4 inline-block text-center">Descargar</a>
-                </div>
-                <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
-                    <span class="text-5xl mb-6">🍎</span>
-                    <h3 class="font-bold text-sea-deep mb-2">macOS</h3>
-                    <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/MASALLADELMAR-1.0-mac.zip" download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold hover:bg-sea-deep transition-all mt-4 inline-block text-center">Descargar</a>
-                </div>
-                <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
-                    <span class="text-5xl mb-6">📱</span>
-                    <h3 class="font-bold text-sea-deep mb-2">Android</h3>
-                    <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/ma.dm-1.0-1768048284-release.apk" download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold hover:bg-sea-deep transition-all mt-4 inline-block text-center">Descargar</a>
-                </div>
-            </div>
-
-            <!-- Contador -->
-            <div class="max-w-4xl mx-auto mb-24 p-1 rounded-3xl bg-gradient-to-r from-sea-main via-sea-accent to-sea-main shadow-xl">
-                <div class="bg-white rounded-[1.4rem] p-10">
-                    <h3 class="text-sea-main font-serif text-2xl mb-2 font-bold uppercase tracking-widest">Próxima Entrega: Capítulo 1</h3>
-                    <p class="text-slate-500 mb-8 font-light italic text-sm">Lanzamiento oficial: PRÓXIMAMENTE</p>
-                    <div class="flex justify-center gap-4 md:gap-8">
-                        <div class="flex flex-col items-center">
-                            <div id="days" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Días</span>
-                        </div>
-                        <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
-                        <div class="flex flex-col items-center">
-                            <div id="hours" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Horas</span>
-                        </div>
-                        <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
-                        <div class="flex flex-col items-center">
-                            <div id="minutes" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Minutos</span>
-                        </div>
-                        <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
-                        <div class="flex flex-col items-center">
-                            <div id="seconds" class="text-4xl md:text-6xl font-serif font-bold text-sea-accent mb-1">00</div>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Segundos</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Créditos y Donaciones -->
-            <div class="grid md:grid-cols-2 gap-8 text-left max-w-5xl mx-auto">
-                <div class="bg-red-50/50 backdrop-blur-sm p-8 rounded-3xl border border-red-200">
-                    <h4 class="font-serif font-bold text-red-900 mb-4 flex items-center gap-2">
-                        <span class="text-xl">⚖️</span> Créditos y Copyright
-                    </h4>
-                    <div class="text-sm space-y-3 text-red-800 leading-relaxed">
-                        <p>Este es un proyecto sin fines de lucro creado por fans y para fans.</p>
-                        <p><strong>Attack on Titan</strong> es propiedad de <strong>Hajime Isayama</strong>, Kodansha, Wit Studio y MAPPA.</p>
-                        <p>No se pretende infringir ningún derecho de autor. Por favor, apoya la obra oficial.</p>
-                    </div>
-                </div>
-
-                <div class="bg-white/80 backdrop-blur-sm p-8 rounded-3xl border border-sea-light/20 flex flex-col justify-between">
-                    <div>
-                        <h4 class="font-serif font-bold text-sea-main mb-4 flex items-center gap-2">
-                            <span class="text-xl">☕</span> Apoya el Proyecto
-                        </h4>
-                        <p class="text-sm text-slate-600 mb-6 leading-relaxed">Si te gusta mi trabajo y quieres ayudarme a seguir desarrollando el juego, puedes invitarme a un café. ¡Toda ayuda es muy agradecida!</p>
-                    </div>
-                    <a href="https://ko-fi.com/sel_masalladelmar" target="_blank" class="w-full bg-coffee text-sea-deep py-4 rounded-xl font-bold text-center flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform shadow-md">
-                        <span class="text-xl">☕</span> Invítame a un café
+    <!-- CONTENEDOR VISTA PRINCIPAL -->
+    <div id="main-content-view">
+        <!-- Hero Section -->
+        <section id="inicio" class="hero-sea min-h-screen flex flex-col items-center justify-center text-center px-6 pt-20">
+            <div class="max-w-7xl w-full">
+                <h1 class="responsive-title text-white text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 drop-shadow-[0_5px_15px_rgba(0,0,0,0.5)] leading-tight">
+                    Más Allá del Mar
+                </h1>
+                <p class="text-sea-soft text-lg md:text-2xl font-light mb-16 tracking-[0.4em] uppercase drop-shadow-md">
+                    fangame de Attack on Titan
+                </p>
+                <div class="flex flex-col md:flex-row gap-8 justify-center">
+                    <a href="#descargar" class="bg-sea-main text-white px-14 py-5 rounded-full font-bold uppercase tracking-[0.2em] text-sm shadow-2xl hover:scale-105 hover:bg-sea-light transition-all">
+                        Comenzar Aventura
                     </a>
                 </div>
             </div>
-            <p class="mt-20 text-xs text-slate-400 italic font-sans">Desarrollado con ❤️ en Ren'Py por srtaspanishgirl</p>
+        </section>
+
+        <!-- Historia Section -->
+        <section id="historia" class="py-32 bg-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-sea-main font-serif text-4xl mb-8 font-bold">¿Qué es Más Allá del Mar?</h2>
+                <p class="text-slate-600 text-xl leading-relaxed font-light italic">
+                    Este es un "fan game" interactivo inspirado en el universo de Shingeki no Kyojin donde tú eres el protagonista. Contiene mecánicas de decisiones, rutas amorosas y diversos finales. Tus elecciones influirán en la afinidad con los personajes, pudiendo enamorar a las rutas y crear preciosas amistades con el resto.
+                </p>
+            </div>
+        </section>
+
+        <!-- Personajes Section -->
+        <section id="personajes" class="py-24 bg-sea-soft overflow-hidden">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-sea-main font-serif text-4xl mb-4 text-center font-bold">Rutas disponibles</h2>
+                <p class="text-slate-500 text-center mb-16 uppercase tracking-widest text-xs">Conoce las rutas amorosas oficiales</p>
+                <div class="relative group">
+                    <button onclick="moveCarousel(-1)" class="absolute left-[-20px] top-1/2 -translate-y-1/2 z-10 bg-white p-4 rounded-full shadow-lg hover:text-sea-light transition-all">
+                        <span class="text-2xl">←</span>
+                    </button>
+                    <button onclick="moveCarousel(1)" class="absolute right-[-20px] top-1/2 -translate-y-1/2 z-10 bg-white p-4 rounded-full shadow-lg hover:text-sea-light transition-all">
+                        <span class="text-2xl">→</span>
+                    </button>
+                    <div class="overflow-hidden rounded-3xl">
+                        <div id="carousel" class="carousel-container">
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/736x/d6/1c/6b/d61c6baa534c3a8f9221edc1ddb9c4e7.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Levi Ackerman</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/736x/5b/27/61/5b27611f0e358dbf2f21b290c3492ad8.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Eren Jaeger</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/1200x/2c/0f/37/2c0f37769aaab3c0a3710ce5f1447f73.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Armin Arlert</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/736x/5d/71/7c/5d717c8b77dada8d631f452b69703779.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Mikasa Ackerman</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/1200x/f5/20/8b/f5208ba95bf860423fdf78ad9f7f931d.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Hange Zoë</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/1200x/e6/5f/ee/e65fee392e6f29d8f83349c95b87e04d.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Jean Kirstein</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/1200x/75/13/a8/7513a88834a29951269cf16abbabc530.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Erwin Smith</div></div></div>
+                            <div class="character-card"><div class="bg-white rounded-2xl shadow-xl overflow-hidden relative aspect-[3/4]"><img src="https://i.pinimg.com/736x/49/f6/48/49f6483d7a95b30dca904c10ad08840d.jpg" class="char-img char-img-top"><div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-black/80 to-transparent text-white font-serif text-xl">Reiner Braun</div></div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comunidad -->
+        <section id="comunidad" class="py-24 bg-white text-center">
+            <div class="max-w-4xl mx-auto px-6">
+                <h2 class="text-sea-main font-serif text-4xl mb-6 font-bold">Únete a la Legión</h2>
+                <p class="text-slate-600 mb-10 text-lg">Síguenos si quieres enterarte de primera mano de las actualizaciones del juego, conocer a gente apasionada por SNK o mostrar tus fanarts, ¡te esperamos!</p>
+                
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6">
+                    <a href="https://discord.gg/gK7EddKtuv" target="_blank" class="w-full sm:w-64 bg-discord text-white px-8 py-5 rounded-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition-transform shadow-lg group">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21a105.73,105.73,0,0,0,32.22,16.15,77.7,77.7,0,0,0,7.34-11.86,67.35,67.35,0,0,1-11.9-5.69c.3-.22.59-.45.88-.67a73.42,73.42,0,0,0,65.43,0c.29.22.58.45.88.67a67.34,67.34,0,0,1-11.9,5.69,77.76,77.76,0,0,0,7.34,11.86,105.27,105.27,0,0,0,32.25-16.15C129.58,50.49,125.16,26.78,117.7,8.07ZM42.47,65.66C36.18,65.66,31,59.85,31,52.71s5.07-12.95,11.42-12.95,11.53,5.81,11.53,12.95S48.86,65.66,42.47,65.66Zm42.2,0C78.38,65.66,73.2,59.85,73.2,52.71s5.07-12.95,11.42-12.95,11.53,5.81,11.53,12.95S91.06,65.66,84.67,65.66Z"/></svg>
+                        <span class="text-lg">Discord</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@srtaspanishgirl" target="_blank" class="w-full sm:w-64 bg-tiktok text-white px-8 py-5 rounded-2xl font-bold flex items-center justify-center gap-4 hover:scale-105 transition-transform shadow-lg group">
+                        <svg class="w-6 h-6 fill-current" viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/></svg>
+                        <span class="text-lg">TikTok</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Descargar Section -->
+        <section id="descargar" class="py-32 bg-sea-soft text-center">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-sea-main font-serif text-4xl mb-6 font-bold">Descarga el Juego</h2>
+                <p class="text-slate-600 mb-16 text-lg max-w-2xl mx-auto">El prólogo del juego ya está disponible. ¡Empieza tu historia hoy mismo!</p>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
+                        <span class="text-5xl mb-6">💻</span><h3 class="font-bold text-sea-deep mb-2">PC Windows</h3><a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/MASALLADELMAR-1.0-pc.zip" download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold mt-4 inline-block text-center">Descargar</a>
+                    </div>
+                    <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
+                        <span class="text-5xl mb-6">🍎</span><h3 class="font-bold text-sea-deep mb-2">macOS</h3><a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/MASALLADELMAR-1.0-mac.zip" download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold mt-4 inline-block text-center">Descargar</a>
+                    </div>
+                    <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
+                        <span class="text-5xl mb-6">📱</span><h3 class="font-bold text-sea-deep mb-2">Android</h3><a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/ma.dm-1.0-1768048284-release.apk" download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold mt-4 inline-block text-center">Descargar</a>
+                    </div>
+                </div>
+
+                <!-- Contador -->
+                <div class="max-w-4xl mx-auto mb-24 p-1 rounded-3xl bg-gradient-to-r from-sea-main via-sea-accent to-sea-main shadow-xl">
+                    <div class="bg-white rounded-[1.4rem] p-10">
+                        <h3 class="text-sea-main font-serif text-2xl mb-2 font-bold uppercase tracking-widest">Próxima Entrega: Capítulo 1</h3>
+                        <p class="text-slate-500 mb-8 font-light italic text-sm">Lanzamiento oficial: PRÓXIMAMENTE</p>
+                        <div class="flex justify-center gap-4 md:gap-8">
+                            <div class="flex flex-col items-center"><div id="days" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div><span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Días</span></div>
+                            <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
+                            <div class="flex flex-col items-center"><div id="hours" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div><span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Horas</span></div>
+                            <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
+                            <div class="flex flex-col items-center"><div id="minutes" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div><span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Minutos</span></div>
+                            <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
+                            <div class="flex flex-col items-center"><div id="seconds" class="text-4xl md:text-6xl font-serif font-bold text-sea-accent mb-1">00</div><span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Segundos</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 text-left max-w-5xl mx-auto">
+                    <div class="bg-red-50/50 p-8 rounded-3xl border border-red-200"><h4 class="font-serif font-bold text-red-900 mb-4">⚖️ Créditos y Copyright</h4><div class="text-sm space-y-3 text-red-800"><p>Este es un proyecto sin fines de lucro creado por fans y para fans.</p><p><strong>Attack on Titan</strong> es propiedad de <strong>Hajime Isayama</strong>, Kodansha, Wit Studio y MAPPA.</p><p>No se pretende infringir ningún derecho de autor. Por favor, apoya la obra oficial.</p></div></div>
+                    <div class="bg-white/80 p-8 rounded-3xl border border-sea-light/20 flex flex-col justify-between"><div><h4 class="font-serif font-bold text-sea-main mb-4">☕ Apoya el Proyecto</h4><p class="text-sm text-slate-600 mb-6">Si te gusta mi trabajo y quieres ayudarme a seguir desarrollando el juego, puedes invitarme a un café. ¡Toda ayuda es muy agradecida!</p></div><a href="https://ko-fi.com/sel_masalladelmar" target="_blank" class="w-full bg-coffee text-sea-deep py-4 rounded-xl font-bold text-center">Invítame a un café</a></div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- VISTA GUÍA DE RESPUESTAS -->
+    <div id="guide-content-view" class="view-hidden min-h-screen pt-32 pb-20 bg-sea-soft flex flex-col items-center px-6">
+        <div class="max-w-5xl w-full">
+            <div id="guide-selector" class="text-center">
+                <h2 class="text-sea-main font-serif text-4xl md:text-5xl mb-6 font-bold">Guía de Respuestas</h2>
+                <div class="grid gap-6 max-w-2xl mx-auto">
+                    <button onclick="openGuideText()" class="bg-white p-8 rounded-3xl border border-sea-light/20 shadow-xl flex items-center justify-between hover:shadow-2xl transition-all group"><div class="text-left"><h3 class="font-serif font-bold text-2xl text-sea-deep">Prólogo</h3><p class="text-slate-500 text-sm">Consulta las decisiones aquí mismo.</p></div><span class="bg-sea-main text-white p-3 rounded-full group-hover:bg-sea-light">→</span></button>
+                    <div class="bg-white/40 p-8 rounded-3xl border border-dashed border-sea-light/30 flex items-center justify-center opacity-60"><p class="text-slate-400 font-bold uppercase tracking-widest text-sm">Capítulo 1 - Próximamente</p></div>
+                </div>
+                <button onclick="showMainView()" class="mt-16 text-sea-main font-bold border-b-2 border-sea-main uppercase tracking-widest text-xs">← Volver al inicio</button>
+            </div>
+
+            <div id="guide-viewer" class="view-hidden">
+                <div class="flex justify-between items-center mb-6"><h3 class="font-serif font-bold text-2xl text-sea-deep uppercase tracking-tighter">Guía Oficial - Prólogo</h3><button onclick="closeGuide()" class="text-sea-main font-bold flex items-center gap-2"><span>✕</span> CERRAR</button></div>
+                <div class="guide-images-container">
+                    <img src="https://i.pinimg.com/736x/05/61/72/0561724e6451d39c2897d2e78c958b2f.jpg" class="guide-page-img">
+                    <img src="https://i.pinimg.com/736x/12/74/25/127425133080310d911e1e27307d488f.jpg" class="guide-page-img">
+                    <img src="https://i.pinimg.com/736x/cb/2b/c8/cb2bc8cf44183c9df15b8463ad85120c.jpg" class="guide-page-img">
+                    <img src="https://i.pinimg.com/736x/41/21/08/412108df3201f04d85df216407e37f96.jpg" class="guide-page-img">
+                    <img src="https://i.pinimg.com/736x/6e/25/c7/6e25c79d083d69613a8d3dfb1359dfc2.jpg" class="guide-page-img">
+                </div>
+                <button onclick="closeGuide()" class="mt-8 bg-sea-main text-white px-10 py-4 rounded-full font-bold shadow-lg block mx-auto">Volver al selector</button>
+            </div>
         </div>
-    </section>
+    </div>
 
     <footer class="bg-sea-deep text-white/40 py-12 text-center text-xs uppercase tracking-widest">
-        <div class="flex justify-center gap-6 mb-6">
-            <a href="https://www.tiktok.com/@srtaspanishgirl" target="_blank" class="hover:text-white transition-colors">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 448 512"><path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a122.18,122.18,0,0,0,67,20.14Z"/></svg>
-            </a>
-            <a href="https://discord.gg/gK7EddKtuv" target="_blank" class="hover:text-white transition-colors">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 127.14 96.36"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.71,32.65-1.82,56.6.48,80.21a105.73,105.73,0,0,0,32.22,16.15,77.7,77.7,0,0,0,7.34-11.86,67.35,67.35,0,0,1-11.9-5.69c.3-.22.59-.45.88-.67a73.42,73.42,0,0,0,65.43,0c.29.22.58.45.88.67a67.34,67.34,0,0,1-11.9,5.69,77.76,77.76,0,0,0,7.34,11.86,105.27,105.27,0,0,0,32.25-16.15C129.58,50.49,125.16,26.78,117.7,8.07ZM42.47,65.66C36.18,65.66,31,59.85,31,52.71s5.07-12.95,11.42-12.95,11.53,5.81,11.53,12.95S48.86,65.66,42.47,65.66Zm42.2,0C78.38,65.66,73.2,59.85,73.2,52.71s5.07-12.95,11.42-12.95,11.53,5.81,11.53,12.95S91.06,65.66,84.67,65.66Z"/></svg>
-            </a>
-        </div>
         <p>© 2026 srtaspanishgirl - Fan Game de Attack on Titan</p>
     </footer>
 
     <script>
+        const mainView = document.getElementById('main-content-view');
+        const guideView = document.getElementById('guide-content-view');
+        const tutorialView = document.getElementById('tutorial-view');
+        const guideSelector = document.getElementById('guide-selector');
+        const guideViewer = document.getElementById('guide-viewer');
+
+        function hideAllViews() {
+            mainView.classList.add('view-hidden');
+            guideView.classList.add('view-hidden');
+            if (tutorialView) tutorialView.classList.add('view-hidden');
+        }
+
+        function showGuideView() {
+            hideAllViews();
+            guideView.classList.remove('view-hidden');
+            guideSelector.classList.remove('view-hidden');
+            guideViewer.classList.add('view-hidden');
+            window.scrollTo(0,0);
+        }
+
+        function showMainView() {
+            hideAllViews();
+            mainView.classList.remove('view-hidden');
+            window.scrollTo(0,0);
+        }
+
+        function openGuideText() {
+            guideSelector.classList.add('view-hidden');
+            guideViewer.classList.remove('view-hidden');
+            window.scrollTo(0,0);
+        }
+
+        function closeGuide() {
+            guideViewer.classList.add('view-hidden');
+            guideSelector.classList.remove('view-hidden');
+        }
+
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
-
         menuBtn.addEventListener('click', () => {
             const isOpen = mobileMenu.classList.toggle('open');
             menuIcon.setAttribute('d', isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16');
         });
 
-        document.querySelectorAll('#mobile-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
-            });
-        });
-        
         let currentPos = 0;
         function moveCarousel(direction) {
             const carousel = document.getElementById('carousel');
@@ -432,6 +406,7 @@
     </script>
 </body>
 </html>
+
 
 
 
