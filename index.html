@@ -79,10 +79,6 @@
             object-position: top;
         }
 
-        @media (min-width: 1536px) {
-            html { font-size: 18px; }
-        }
-
         #mobile-menu {
             max-height: 0;
             overflow: hidden;
@@ -98,10 +94,6 @@
             overflow-wrap: break-word;
             hyphens: auto;
             white-space: normal;
-        }
-
-        .character-card:hover .char-img {
-            transform: scale(1.08);
         }
 
         .view-hidden { display: none !important; }
@@ -126,25 +118,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
             border-radius: 8px;
             border: 1px solid #e2e8f0;
-        }
-
-        /* Estilo para el contenedor del video de Pinterest */
-        .pinterest-video-container {
-            position: relative;
-            padding-bottom: 177.77%; /* Proporción 9:16 para móviles */
-            height: 0;
-            overflow: hidden;
-            max-width: 450px;
-            margin: 0 auto;
-            border-radius: 20px;
-            background: #000;
-        }
-        .pinterest-video-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
         }
 
     </style>
@@ -264,24 +237,24 @@
         <section id="descargar" class="py-32 bg-sea-soft text-center">
             <div class="max-w-6xl mx-auto px-6">
                 <h2 class="text-sea-main font-serif text-4xl mb-6 font-bold">Descarga el Juego</h2>
-                <p class="text-slate-600 mb-16 text-lg max-w-2xl mx-auto">El prólogo del juego ya está disponible. ¡Empieza tu historia hoy mismo!</p>
+                <p class="text-slate-600 mb-16 text-lg max-w-2xl mx-auto">CAPÍTULO UNO DISPONIBLE. ¡Empieza tu historia hoy mismo!</p>
                 
                 <div class="grid md:grid-cols-3 gap-8 mb-12">
                     <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
                         <span class="text-5xl mb-6">💻</span><h3 class="font-bold text-sea-deep mb-2">PC Windows</h3>
-                        <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/MASALLADELMAR-1.0-pc.zip"
+                        <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.01/MasAllaDelMar_0-1.1-pc.zip"
                             onclick="contarDescarga('pc')"
                             download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold mt-4 inline-block text-center">Descargar</a>
                     </div>
                     <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
                         <span class="text-5xl mb-6">🍎</span><h3 class="font-bold text-sea-deep mb-2">macOS</h3>
-                        <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/MASALLADELMAR-1.0-mac.zip"
+                        <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.01/MasAllaDelMar_0-1.1-mac.zip"
                             onclick="contarDescarga('mac')"
                             download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold mt-4 inline-block text-center">Descargar</a>
                     </div>
                     <div class="bg-white p-10 rounded-3xl border border-sea-light/20 flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all">
                         <span class="text-5xl mb-6">📱</span><h3 class="font-bold text-sea-deep mb-2">Android</h3>
-                        <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.0/ma.dm-1.0-1768048284-release.apk"
+                        <a href="https://github.com/srtaspanishgirl/mas-alla-del-mar/releases/download/v1.01/ma.dm-1.1-1774546771-release.apk"
                             onclick="contarDescarga('android')"
                             download class="w-full bg-sea-main text-white py-4 rounded-xl font-bold mt-4 inline-block text-center">Descargar</a>
                     </div>
@@ -290,8 +263,8 @@
                 <!-- Contador -->
                 <div class="max-w-4xl mx-auto mb-24 p-1 rounded-3xl bg-gradient-to-r from-sea-main via-sea-accent to-sea-main shadow-xl">
                     <div class="bg-white rounded-[1.4rem] p-10">
-                        <h3 class="text-sea-main font-serif text-2xl mb-2 font-bold uppercase tracking-widest">Próxima Entrega: Capítulo 1</h3>
-                        <p class="text-slate-500 mb-8 font-light italic text-sm">Lanzamiento oficial: 27.03.2026 | 20:00 hora española</p>
+                        <h3 class="text-sea-main font-serif text-2xl mb-2 font-bold uppercase tracking-widest">Próxima Entrega: Capítulo 2</h3>
+                        <p class="text-slate-500 mb-8 font-light italic text-sm">Lanzamiento oficial: Próximamente</p>
                         <div class="flex justify-center gap-4 md:gap-8">
                             <div class="flex flex-col items-center"><div id="days" class="text-4xl md:text-6xl font-serif font-bold text-sea-deep mb-1">00</div><span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold">Días</span></div>
                             <div class="text-4xl md:text-6xl font-serif text-sea-light/30">:</div>
@@ -318,22 +291,40 @@
             <div id="guide-selector" class="text-center">
                 <h2 class="text-sea-main font-serif text-4xl md:text-5xl mb-6 font-bold">Guía de Respuestas</h2>
                 <div class="grid gap-6 max-w-2xl mx-auto">
-                    <button onclick="openGuideText()" class="bg-white p-8 rounded-3xl border border-sea-light/20 shadow-xl flex items-center justify-between hover:shadow-2xl transition-all group"><div class="text-left"><h3 class="font-serif font-bold text-2xl text-sea-deep">Prólogo</h3><p class="text-slate-500 text-sm">Consulta las decisiones aquí mismo.</p></div><span class="bg-sea-main text-white p-3 rounded-full group-hover:bg-sea-light">→</span></button>
-                    <div class="bg-white/40 p-8 rounded-3xl border border-dashed border-sea-light/30 flex items-center justify-center opacity-60"><p class="text-slate-400 font-bold uppercase tracking-widest text-sm">Capítulo 1 - Próximamente</p></div>
+                    <!-- Botón Prólogo -->
+                    <button onclick="openGuideText('prologo')" class="bg-white p-8 rounded-3xl border border-sea-light/20 shadow-xl flex items-center justify-between hover:shadow-2xl transition-all group">
+                        <div class="text-left">
+                            <h3 class="font-serif font-bold text-2xl text-sea-deep">Prólogo</h3>
+                            <p class="text-slate-500 text-sm">Consulta las respuestas.</p>
+                        </div>
+                        <span class="bg-sea-main text-white p-3 rounded-full group-hover:bg-sea-light">→</span>
+                    </button>
+                    <!-- Botón Capítulo 1 -->
+                    <button onclick="openGuideText('capitulo1')" class="bg-white p-8 rounded-3xl border border-sea-light/20 shadow-xl flex items-center justify-between hover:shadow-2xl transition-all group">
+                        <div class="text-left">
+                            <h3 class="font-serif font-bold text-2xl text-sea-deep">Capítulo 1</h3>
+                            <p class="text-slate-500 text-sm">Consulta las respuestas.</p>
+                        </div>
+                        <span class="bg-sea-main text-white p-3 rounded-full group-hover:bg-sea-light">→</span>
+                    </button>
+                    <!-- Bloque Próximamente -->
+                    <div class="bg-white/40 p-8 rounded-3xl border border-dashed border-sea-light/30 flex items-center justify-center opacity-60">
+                        <p class="text-slate-400 font-bold uppercase tracking-widest text-sm">Capítulo 2 - Próximamente</p>
+                    </div>
                 </div>
                 <button onclick="showMainView()" class="mt-16 text-sea-main font-bold border-b-2 border-sea-main uppercase tracking-widest text-xs">← Volver al inicio</button>
             </div>
 
+            <!-- Visor Dinámico -->
             <div id="guide-viewer" class="view-hidden">
-                <div class="flex justify-between items-center mb-6"><h3 class="font-serif font-bold text-2xl text-sea-deep uppercase tracking-tighter">Guía Oficial - Prólogo</h3><button onclick="closeGuide()" class="text-sea-main font-bold flex items-center gap-2"><span>✕</span> CERRAR</button></div>
-                <div class="guide-images-container">
-                    <img src="https://i.pinimg.com/736x/05/61/72/0561724e6451d39c2897d2e78c958b2f.jpg" class="guide-page-img">
-                    <img src="https://i.pinimg.com/736x/12/74/25/127425133080310d911e1e27307d488f.jpg" class="guide-page-img">
-                    <img src="https://i.pinimg.com/736x/cb/2b/c8/cb2bc8cf44183c9df15b8463ad85120c.jpg" class="guide-page-img">
-                    <img src="https://i.pinimg.com/736x/41/21/08/412108df3201f04d85df216407e37f96.jpg" class="guide-page-img">
-                    <img src="https://i.pinimg.com/736x/6e/25/c7/6e25c79d083d69613a8d3dfb1359dfc2.jpg" class="guide-page-img">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 id="guide-viewer-title" class="font-serif font-bold text-2xl text-sea-deep uppercase tracking-tighter">Guía Oficial</h3>
+                    <button onclick="closeGuide()" class="text-sea-main font-bold flex items-center gap-2"><span>✕</span> CERRAR</button>
                 </div>
-                <button onclick="closeGuide()" class="mt-8 bg-sea-main text-white px-10 py-4 rounded-full font-bold shadow-lg block mx-auto">Volver al selector</button>
+                <div id="guide-images-container" class="guide-images-container">
+                    <!-- Las imágenes se insertan aquí vía JS -->
+                </div>
+                <button onclick="closeGuide()" class="mt-8 bg-sea-main text-white px-10 py-4 rounded-full font-bold shadow-lg block mx-auto">Volver</button>
             </div>
         </div>
     </div>
@@ -345,24 +336,21 @@
     <script>
         const mainView = document.getElementById('main-content-view');
         const guideView = document.getElementById('guide-content-view');
-        const tutorialView = document.getElementById('tutorial-view');
         const guideSelector = document.getElementById('guide-selector');
         const guideViewer = document.getElementById('guide-viewer');
+        const guideImagesContainer = document.getElementById('guide-images-container');
+        const guideViewerTitle = document.getElementById('guide-viewer-title');
 
         function contarDescarga(plataforma) {
-            // REEMPLAZA ESTA URL por tu enlace de Google Apps Script que termina en /exec
             const urlScript = "https://script.google.com/macros/s/AKfycbw96lrN37EvE0uPeH1ebSIOfFzfOZr-GUo39XvWEoUvWCbyHpfmbHb_MbOHuRv-sQFWKA/exec";
-    
-            // Esto envía la señal al Excel de forma silenciosa
             fetch(`${urlScript}?accion=contar&plataforma=${plataforma}`, {
-                mode: 'no-cors' // Esto evita problemas de seguridad del navegador
+                mode: 'no-cors' 
             });
         }
 
         function hideAllViews() {
             mainView.classList.add('view-hidden');
             guideView.classList.add('view-hidden');
-            if (tutorialView) tutorialView.classList.add('view-hidden');
         }
 
         function showGuideView() {
@@ -379,7 +367,39 @@
             window.scrollTo(0,0);
         }
 
-        function openGuideText() {
+        function openGuideText(capitulo) {
+            guideImagesContainer.innerHTML = '';
+            let imagenes = [];
+
+            if (capitulo === 'prologo') {
+                guideViewerTitle.innerText = "Guía Oficial - Prólogo";
+                // LINKS DEL PRÓLOGO (DONDE ESTABAN)
+                imagenes = [
+                    "https://i.pinimg.com/736x/05/61/72/0561724e6451d39c2897d2e78c958b2f.jpg",
+                    "https://i.pinimg.com/736x/12/74/25/127425133080310d911e1e27307d488f.jpg",
+                    "https://i.pinimg.com/736x/cb/2b/c8/cb2bc8cf44183c9df15b8463ad85120c.jpg",
+                    "https://i.pinimg.com/736x/41/21/08/412108df3201f04d85df216407e37f96.jpg",
+                    "https://i.pinimg.com/736x/6e/25/c7/6e25c79d083d69613a8d3dfb1359dfc2.jpg"
+                ];
+            } else if (capitulo === 'capitulo1') {
+                guideViewerTitle.innerText = "Guía Oficial - Capítulo 1";
+                // NUEVOS LINKS DEL CAPÍTULO 1
+                imagenes = [
+                    "https://i.pinimg.com/736x/16/c1/7a/16c17a246f141d9c4c18f119e2d2d02e.jpg", 
+                    "https://i.pinimg.com/736x/60/34/78/6034789a065d49610917f0068ebbbe1a.jpg", 
+                    "https://i.pinimg.com/736x/f3/b4/d6/f3b4d66d3a8f109e5a6c3c1d4118c1ec.jpg"
+                ];
+            }
+
+            // Generar las imágenes en el contenedor
+            imagenes.forEach(src => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.className = 'guide-page-img';
+                img.alt = "Página de guía";
+                guideImagesContainer.appendChild(img);
+            });
+
             guideSelector.classList.add('view-hidden');
             guideViewer.classList.remove('view-hidden');
             window.scrollTo(0,0);
@@ -390,6 +410,7 @@
             guideSelector.classList.remove('view-hidden');
         }
 
+        // Script del Menú Móvil
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const menuIcon = document.getElementById('menu-icon');
@@ -398,6 +419,7 @@
             menuIcon.setAttribute('d', isOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16');
         });
 
+        // Carrusel
         let currentPos = 0;
         function moveCarousel(direction) {
             const carousel = document.getElementById('carousel');
@@ -409,8 +431,9 @@
             carousel.style.transform = `translateX(-${currentPos * (100 / visibleCards)}%)`;
         }
 
+        // Cuenta atrás
         function startCountdown() {
-            const targetDate = new Date('March 27, 2026 20:00:00').getTime();
+            const targetDate = new Date('March 27, 2025 20:00:00').getTime();
             setInterval(function() {
                 const now = new Date().getTime();
                 const distance = targetDate - now;
@@ -426,19 +449,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
